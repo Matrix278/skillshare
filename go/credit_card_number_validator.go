@@ -35,12 +35,18 @@ func validateCreditCardNumber(creditCardNumber string) string {
 
 func checkLuhnAlgorithm(creditCardNumber string) bool {
 	var sum int
-	for i, digit := range creditCardNumber {
-		if i%2 == 0 {
-			sum += int(digit - '0')
-		} else {
-			sum += 2 * int(digit-'0')
+	var alternate bool
+
+	for i := len(creditCardNumber) - 1; i >= 0; i-- {
+		var n int = int(creditCardNumber[i] - '0')
+		if alternate {
+			n *= 2
+			if n > 9 {
+				n = (n % 10) + 1
+			}
 		}
+		sum += n
+		alternate = !alternate
 	}
 
 	return sum%10 == 0
