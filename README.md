@@ -1,2 +1,2 @@
-# skillshare
+# Skillshare
 Skillshare course projects
